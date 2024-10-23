@@ -1,6 +1,7 @@
 """
 Variables, functions, and classes associated with AlphaFold2 and whatnot.
 """
+
 import numpy as np
 
 
@@ -36,10 +37,12 @@ def score_af2m_binding(af2m_dict: str, binder_len: int, target_len: int = None) 
 
   pae_binder = np.mean(pae_array[:binder_len, :binder_len])
   pae_target = np.mean(pae_array[binder_len:target_end, binder_len:target_end])
-  ipae = np.mean([
-    np.mean(pae_array[:binder_len, binder_len:target_end]),
-    np.mean(pae_array[binder_len:target_end, :binder_len]),
-  ])
+  ipae = np.mean(
+    [
+      np.mean(pae_array[:binder_len, binder_len:target_end]),
+      np.mean(pae_array[binder_len:target_end, :binder_len]),
+    ]
+  )
 
   return {
     "plddt_binder": float(plddt_binder),

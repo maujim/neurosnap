@@ -11,7 +11,7 @@ filenames = [
   # "src/neurosnap/algos/alphafold.py",
 ]
 
-print() #  required
+print()  #  required
 
 for filename in filenames:
   module_doc_start = False
@@ -22,7 +22,7 @@ for filename in filenames:
     import_statement = f"from {".".join(filename_clean[:-1])} import {filename_clean[-1]}"
     # print module title
     print(f"### {filename_clean[-1].upper()} MODULE")
-    
+
     func = None
     for line in f:
       # get module doc
@@ -32,7 +32,7 @@ for filename in filenames:
         module_doc_end = True
       elif module_doc_start == True and module_doc_end == False:
         print(line)
-      
+
       # function doc
       match = re.search(r"^def (.*)\:", line)
       if match:
@@ -60,12 +60,12 @@ for filename in filenames:
         if params:
           print(f"##### Parameters:")
           for x in params:
-            t,d = x.split(":", 1)
+            t, d = x.split(":", 1)
             print(f"- **{t.strip('.')}**: {d}")
         if returns:
           print(f"##### Returns:")
           for x in returns:
-            t,d = x.split(":", 1)
+            t, d = x.split(":", 1)
             print(f"- **{t.strip('.')}**: {d}")
         print()
       elif comment_border1 == True and comment_border2 == False:
