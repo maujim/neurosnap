@@ -3,6 +3,7 @@ Provides functions and classes related to processing and generating conformers.
 """
 
 import os
+from typing import Dict, Tuple
 
 import numpy as np
 import pandas as pd
@@ -14,15 +15,15 @@ from rdkit.ML.Cluster import Butina
 from neurosnap.log import logger
 
 
-def find_LCS(mol):
+def find_LCS(mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
   """Find the largest common substructure (LCS) between a
   set of conformers and aligns all conformers to the LCS.
 
   Parameters:
-    mol: Input RDkit molecule object, must already have conformers present (rdkit.Chem.rdchem.Mol)
+    mol: Input RDkit molecule object, must already have conformers present
 
   Returns:
-    rdkit.Chem.rdchem.Mol: Resultant molecule object with all conformers aligned to the LCS
+    Resultant molecule object with all conformers aligned to the LCS
 
   Raises:
     Exception: if no LCS is detected
@@ -49,7 +50,8 @@ def find_LCS(mol):
   return mol
 
 
-def minimize(mol, method: str = "MMFF94", e_delta=5):
+def minimize(mol: Chem.rdchem.Mol, method: str = "MMFF94", e_delta : float=5.0)
+-> Tuple[float, Dict[int, float]]:
   """Minimize conformer energy (kcal/mol) using RDkit
   and filter out conformers below a certain threshold.
 

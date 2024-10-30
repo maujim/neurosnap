@@ -238,7 +238,7 @@ class NeurosnapAPI:
     assert response.status_code == 200, f"Expected status code 200, got {response.status_code}"
     print(f"Note set successfully for job ID {job_id}.")
 
-  def set_job_share(self, job_id: str) -> dict:
+  def set_job_share(self, job_id: str) -> str:
     """Enables the sharing feature of a job and makes it public.
 
     Parameters:
@@ -246,9 +246,8 @@ class NeurosnapAPI:
 
     Returns:
       str: The JSON response containing the share ID.
-    """
-    # FIXME: return type in typehint and in docstring are different
 
+    """
     # Send the request to set job share
     response = requests.get(f"{self.BASE_URL}/job/share/set/{job_id}", headers=self.headers)
     assert response.status_code == 200, f"Expected status code 200, got {response.status_code}"
